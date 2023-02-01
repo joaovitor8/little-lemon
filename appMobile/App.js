@@ -1,12 +1,11 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
-import { StatusBar } from 'expo-status-bar';
+//import { StatusBar } from 'expo-status-bar';
 
 import LittleLemonHeader from './components/LittleLemonHeader';
-import LittleLemonBody from './components/LittleLemonBody';
+//import LittleLemonBody from './components/LittleLemonBody';
+import LittleLemonMenuList from './components/LittleLemonMenuList';
 import LittleLemonFooter from './components/LittleLemonFooter';
-
-import LittleLemonMenuList from './components/LittleLemonList';
 
 export default function App() {
   return (
@@ -20,9 +19,11 @@ export default function App() {
           <LittleLemonMenuList/>
         </View>
 
+        {/* 
         <View>
           <LittleLemonBody />
         </View>
+        */}
       </ScrollView>
       
       <View style={styles.fundoLaranja}>
@@ -43,5 +44,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-//#F4CE14, #EE9972, #333333, #EDEFEE, black and white
