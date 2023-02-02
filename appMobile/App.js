@@ -4,7 +4,9 @@ import {StyleSheet, View, ScrollView} from 'react-native';
 
 import LittleLemonHeader from './components/LittleLemonHeader';
 //import LittleLemonBody from './components/LittleLemonBody';
-import LittleLemonMenuList from './components/LittleLemonMenuList';
+//import LittleLemonFlatList from './components/LittleLemonFlatList';
+import LittleLemonSectionList from './components/LittleLemonSectionList';
+import LittleLemonTextInput from './components/LittleLemonTextInput';
 import LittleLemonFooter from './components/LittleLemonFooter';
 
 export default function App() {
@@ -16,8 +18,14 @@ export default function App() {
 
       <ScrollView>
         <View>
+          <LittleLemonSectionList />
+        </View>
+
+        {/*
+        <View>
           <LittleLemonMenuList/>
         </View>
+        */}
 
         {/* 
         <View>
