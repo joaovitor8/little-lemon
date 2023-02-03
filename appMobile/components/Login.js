@@ -1,6 +1,6 @@
 import {Text, StyleSheet, View, TextInput} from 'react-native';
 
-export default function LittleLemonLogin() {
+export default function() {
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Welcome to Little Lemon</Text>

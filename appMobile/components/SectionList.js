@@ -44,7 +44,7 @@ const menuItemsToDisplay = [
   },
 ];
 
-export default function LittleLemonSectionList() {
+export default function() {
   return(
     <View>
       <SectionList

@@ -25,7 +25,7 @@ const menuItems = [
 ];
 
 
-export default function LittleLemonFlatList() {
+export default function() {
   return(
     <View>
       <FlatList data={menuItems} keyExtractor={item => item.id} renderItem={({item}) => <Text style={styleList.itens}>{item.name}   -   {item.price}</Text>}/>

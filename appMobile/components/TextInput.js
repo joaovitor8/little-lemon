@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { View, Text, StyleSheet, TextInput} from 'react-native';
 
-export default function LittleLemonTextInput() {
+export default function() {
   const [nome, setNome] = useState("")
   const [email, setEmail] = useState("")
   const [msn, setMsn] = useState("")

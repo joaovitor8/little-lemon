@@ -2,60 +2,63 @@ import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
 //import { StatusBar } from 'expo-status-bar';
 
-import LittleLemonHeader from './components/LittleLemonHeader';
-//import LittleLemonBody from './components/LittleLemonBody';
-//import LittleLemonFlatList from './components/LittleLemonFlatList';
-//import LittleLemonSectionList from './components/LittleLemonSectionList';
-//import LittleLemonTextInput from './components/LittleLemonTextInput';
-//import LittleLemonLogin from './components/LittleLemonLogin';
-import LittleLemonPressable from './components/LittleLemonPressable';
-import LittleLemonFooter from './components/LittleLemonFooter';
+import Header from './components/Header';
+//import Body from './components/Body';
+//import FlatList from './components/FlatList';
+//import SectionList from './components/SectionList';
+//import TextInput from './components/TextInput';
+//import Login from './components/Login';
+//import Pressable from './components/Pressable';
+import Img from './components/imagens'
+import Footer from './components/Footer';
 
 export default function App() {
   return (
     <View style={styles.fundoPreto}>
       <View style={styles.fundoLaranja}>
-        <LittleLemonHeader/>
+        <Header/>
       </View>
 
       <ScrollView>
-        <View>
-          <LittleLemonPressable />
-        </View>
-
         {/*
         <View>
-          <LittleLemonLogin />
+          <Pressable />
         </View>
         */}
 
         {/*
         <View>
-          <LittleLemonTextInput />
+          <Login />
         </View>
         */}
 
         {/*
         <View>
-          <LittleLemonSectionList />
+          <TextInput />
         </View>
         */}
 
         {/*
         <View>
-          <LittleLemonFlatList />
+          <SectionList />
+        </View>
+        */}
+
+        {/*
+        <View>
+          <FlatList />
         </View>
         */}
 
         {/* 
         <View>
-          <LittleLemonBody />
+          <Body />
         </View>
         */}
       </ScrollView>
       
       <View style={styles.fundoLaranja}>
-        <LittleLemonFooter />
+        <Footer />
       </View>
     </View>
   );

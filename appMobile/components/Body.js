@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default function LittleLemonBody() {
+export default function() {
   return (
     <View>
         <Text style={styleBody.titulo}>Welcome to Little Lemon</Text>
