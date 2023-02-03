@@ -28,10 +28,16 @@ const menuItems = [
 export default function LittleLemonFlatList() {
   return(
     <View>
-      <FlatList data={menuItems} keyExtractor={item => item.id} renderItem={({item}) => <Text style={styleList.texto}>{item.name}   -   {item.price}</Text>}/>
+      <FlatList data={menuItems} keyExtractor={item => item.id} renderItem={({item}) => <Text style={styleList.itens}>{item.name}   -   {item.price}</Text>}/>
     </View>
   )
 }
 
 
-const styleList = StyleSheet.create({});
+const styleList = StyleSheet.create({
+  itens: {
+    color: '#F4CE14',
+    fontSize: 18,
+    marginBottom: 10
+  },
+});

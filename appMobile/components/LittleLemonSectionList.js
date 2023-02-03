@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, SectionList} from 'react-native';
 
-
 const menuItemsToDisplay = [
   {
     title: 'Appetizers',
@@ -44,7 +43,6 @@ const menuItemsToDisplay = [
     ],
   },
 ];
-
 
 export default function LittleLemonSectionList() {
   return(
