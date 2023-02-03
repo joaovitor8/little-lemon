@@ -1,20 +1,23 @@
-import {Text, StyleSheet, View, TextInput} from 'react-native';
+import {Text, StyleSheet, View, TextInput, Pressable} from 'react-native';
 
 export default function LittleLemonPressable() {
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.headerText}>Welcome to Little Lemon</Text>
       <Text style={styles.regularText}>Login to continue </Text>
       <TextInput style={styles.login} placeholder={"Email"} keyboardType={'email-address'}/>
       <TextInput style={styles.login} placeholder={"Senha"} keyboardType={'numeric'}/>
+
+      <Pressable>
+        <Text style={styles.loginButton}>Log in</Text>
+      </Pressable>
     </View>
   );
 }
 
+//You are loggend in!
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
   headerText: {
     padding: 40,
     fontSize: 30,
@@ -36,5 +39,15 @@ const styles = StyleSheet.create({
     padding: 10,
     borderColor: 'white',
     backgroundColor: 'white',
-  }
+  },
+
+  loginButton: {
+    backgroundColor: 'orange',
+    textAlign: 'center',
+    padding: 20,
+    marginTop: 15,
+    marginLeft: 60,
+    marginRight: 60,
+    borderRadius: 50,
+  },
 });
