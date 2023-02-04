@@ -9,7 +9,7 @@ import Header from './components/Header';
 //import TextInput from './components/TextInput';
 //import Login from './components/Login';
 //import Pressable from './components/Pressable';
-import Img from './components/imagens'
+//import Img from './components/imagens'
 import Footer from './components/Footer';
 
 export default function App() {
@@ -20,6 +20,12 @@ export default function App() {
       </View>
 
       <ScrollView>
+        {/*
+        <View>
+          <Img/>
+        </View>
+        */}
+
         {/*
         <View>
           <Pressable />
