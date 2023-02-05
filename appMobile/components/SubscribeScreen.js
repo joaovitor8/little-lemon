@@ -1,17 +1,27 @@
-import * as React from 'react';
-import { View, Text, Image, StyleSheet, TextInput, Pressable } from 'react-native';
-import { ValidateEmail } from '../utils/index'
+import * as React from "react";
+import { View, Text, Image, StyleSheet, TextInput, Pressable, Alert } from 'react-native';
+import { validateEmail } from '../utils/index'
 
 const SubscribeScreen = () => {
+  const [email, onChangeEmail] = React.useState('')
+
+  const validEmail = validateEmail(email); 
+
   return(
     <View style={styles.login}>
-      <Image style={styles.img} source={require('../assets/little-lemon-logo-grey.png')}  resizeMode="center" accessible={true} accessibilityLabel={'Little Lemon Logo'}/>
+      <Image
+        style={styles.img}
+        source={require('../assets/little-lemon-logo-grey.png')}
+        resizeMode="center"
+        accessible={true}
+        accessibilityLabel={'Little Lemon Logo'}
+      />
 
       <Text style={styles.text}>Subscribe to our newlatter for our latest delicius recipes!</Text>
 
-      <TextInput style={styles.email} placeholder={'Email'} keyboardType={'email-address'}/>
+      <TextInput style={styles.email} value={email} onChangeText={onChangeEmail} placeholder={'Email'} keyboardType={'email-address'} textContentType="emailAddress"/>
 
-      <Pressable style={styles.botao}>
+      <Pressable style={styles.botao} onPress={() => Alert.alert('Thanks for subscribings, stay tuned!')} disabled={!validEmail}>
         <Text style={styles.botaoText}>Subscribe</Text>
       </Pressable>
     </View>
@@ -38,12 +48,14 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   email: {
-    paddingHorizontal: 140,
     paddingVertical: 5,
+    paddingHorizontal: 5,
     borderRadius: 10,
     borderWidth: 2,
     borderColor: 'black',
     marginVertical: 20,
+    textAlign: 'left',
+    width: '90%'
   },
   botao: {
     backgroundColor: '#3E524B',
