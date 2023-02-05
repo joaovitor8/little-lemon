@@ -13,7 +13,7 @@ export default function() {
 const styleHeader = StyleSheet.create({
   text: {
     color:'black',
-    marginTop: 15,
+    marginTop: 20,
     marginBottom: 10,
     fontSize: 30,
     textAlign: 'center'

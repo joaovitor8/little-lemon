@@ -1,19 +1,21 @@
-import {Text, StyleSheet, View, Image, ImageBackground} from 'react-native';
+import {Text, StyleSheet, View, Image, ImageBackground, useColorScheme} from 'react-native';
 
 export default function() {
+  const colorScheme = useColorScheme();
   return (
-    <View>
+    <View style={[colorScheme === 'dark' ? {backgroundColor: '#fff'} : {backgroundColor: '#333333'}]}>
       <View style={styles.viewLogo}>
         <Image style={styles.logo} source={require('../img/Image.png')} resizeMode="center" accessible={true} accessibilityLabel={'Little Lemon Logo'}/>
         <Text style={styles.logoText}>Little Lemon</Text>
       </View>
 
-      <Text style={styles.text}>Little Lemon is a charming neighborhood bistro that serves simple food and classic cocktails in a lively but casual environment. We would love to hear your experience with us!</Text>
+      <Text style={[styles.text, colorScheme === 'dark' ? {color: '#333333'} : {color: '#EDEFEE'}]}>Little Lemon is a charming neighborhood bistro that serves simple food and classic cocktails in a lively but casual environment. We would love to hear your experience with us!</Text>
     </View>
   );
 }
 
 //ImageBackground  -  Usado para colocar uma imagem como papel de parede
+//useColorScheme  -  Altera o tema dark / light
 
 const styles = StyleSheet.create({
   viewLogo: {
@@ -38,6 +40,7 @@ const styles = StyleSheet.create({
   text: {
     color: 'white',
     fontSize: 20,
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+    paddingBottom: '100%',
+  },
 });

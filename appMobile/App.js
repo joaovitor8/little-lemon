@@ -1,5 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; 
 //import { StatusBar } from 'expo-status-bar';
 
 import Header from './components/Header';
@@ -9,8 +11,10 @@ import Header from './components/Header';
 //import TextInput from './components/TextInput';
 //import Login from './components/Login';
 //import Pressable from './components/Pressable';
-//import Img from './components/imagens'
+//import ImgMode from './components/imgMode'
 import Footer from './components/Footer';
+
+//<NavigationContainer>{/* Rest of your app code */}</NavigationContainer>
 
 export default function App() {
   return (
@@ -20,9 +24,10 @@ export default function App() {
       </View>
 
       <ScrollView>
+
         {/*
         <View>
-          <Img/>
+          <ImgMode/>
         </View>
         */}
 
@@ -77,7 +82,6 @@ const styles = StyleSheet.create({
   },
 
   fundoPreto: {
-    backgroundColor: '#333333',
     flex: 1,
   },
 });
