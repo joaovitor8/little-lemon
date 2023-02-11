@@ -1,10 +1,10 @@
-import * as React from "react";
-import { View, Text, Image, StyleSheet, TextInput, Pressable, Alert } from 'react-native';
-import { validateEmail } from '../utils/index'
+import * as React from "react"; //React
+import { View, Text, Image, StyleSheet, TextInput, Pressable, Alert } from 'react-native'; //Componentes do ReactNative
+import { validateEmail } from '../utils/index' //Componentes
 
-const SubscribeScreen = () => {
+
+const CadastrarScreen = () => {
   const [email, onChangeEmail] = React.useState('')
-
   const validEmail = validateEmail(email); 
 
   return(
@@ -19,16 +19,24 @@ const SubscribeScreen = () => {
 
       <Text style={styles.text}>Subscribe to our newlatter for our latest delicius recipes!</Text>
 
-      <TextInput style={styles.email} value={email} onChangeText={onChangeEmail} placeholder={'Email'} keyboardType={'email-address'} textContentType="emailAddress"/>
+      <TextInput
+        style={styles.email}
+        value={email}
+        onChangeText={onChangeEmail}
+        placeholder={'Email'}
+        keyboardType={'email-address'}
+        textContentType="emailAddress"
+      />
 
-      <Pressable style={styles.botao} onPress={() => Alert.alert('Thanks for subscribings, stay tuned!')} disabled={!validEmail}>
+      <Pressable style={styles.botao} onPress={() => Alert.alert('Sucesso!', 'Thanks for subscribings, stay tuned!')} disabled={!validEmail}>
         <Text style={styles.botaoText}>Subscribe</Text>
       </Pressable>
     </View>
   );
 };
 
-export default SubscribeScreen;
+export default CadastrarScreen;
+
 
 const styles = StyleSheet.create({
   login: {
