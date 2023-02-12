@@ -1,9 +1,9 @@
 import { StyleSheet } from 'react-native'; //Componentes do ReactNative
 import { NavigationContainer } from '@react-navigation/native'; //Navegação
 import { createNativeStackNavigator } from '@react-navigation/native-stack'; //Navegação
-import BoasVindasScreen from './screen/BoasVindasScreen'; //Componentes
-import MenuScreen from './screen/MenuScreen'; //Componentes
-import CadastrarScreen from './screen/CadastrarScreen'; //Componentes
+import BoasVindasScreen from './screen/BoasVindasScreen'; //Tela
+import MenuScreen from './screen/MenuScreen'; //Tela
+import CadastrarScreen from './screen/CadastrarScreen'; //Tela
 
 const Stack = createNativeStackNavigator()
 
@@ -19,4 +19,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({});
+const estilos = StyleSheet.create({});

@@ -4,24 +4,24 @@ import { View, Text, Image, StyleSheet, Pressable } from 'react-native'; //Compo
 
 const BoasVindasScreen = ({ navigation }) => {
   return(
-    <View style={styles.welcome}>
+    <View style={estilos.welcome}>
       <Image
-        style={styles.img}
+        style={estilos.img}
         source={require('../assets/little-lemon-logo.png')}
         resizeMode="center"
         accessible={true}
         accessibilityLabel={'Little Lemon Logo'}
       />
 
-      <Text style={styles.text}>Little Lemon, your local Mediterranean Bistro</Text>
+      <Text style={estilos.text}>Little Lemon, your local Mediterranean Bistro</Text>
 
       <View>
-        <Pressable style={styles.botao} onPress={() => navigation.navigate('Cadastrar')}>
-          <Text style={styles.botaoText}>Cadastro</Text>
+        <Pressable style={estilos.botao} onPress={() => navigation.navigate('Cadastrar')}>
+          <Text style={estilos.botaoText}>Cadastro</Text>
         </Pressable>
 
-        <Pressable style={styles.botao} onPress={() => navigation.navigate('Menu')}>
-          <Text style={styles.botaoText}>Menu</Text>
+        <Pressable style={estilos.botao} onPress={() => navigation.navigate('Menu')}>
+          <Text style={estilos.botaoText}>Menu</Text>
         </Pressable>
       </View>
     </View>
@@ -31,7 +31,7 @@ const BoasVindasScreen = ({ navigation }) => {
 export default BoasVindasScreen;
 
 
-const styles = StyleSheet.create({
+const estilos = StyleSheet.create({
   welcome: {
     height: '100%',
     justifyContent: 'space-evenly',

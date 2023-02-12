@@ -1,6 +1,6 @@
 import * as React from "react"; //React
 import { View, Text, Image, StyleSheet, TextInput, Pressable, Alert } from 'react-native'; //Componentes do ReactNative
-import { validateEmail } from '../utils/index' //Componentes
+import { validateEmail } from '../utils/email' //Componentes
 
 
 const CadastrarScreen = () => {
@@ -8,19 +8,19 @@ const CadastrarScreen = () => {
   const validEmail = validateEmail(email); 
 
   return(
-    <View style={styles.login}>
+    <View style={estilos.login}>
       <Image
-        style={styles.img}
+        style={estilos.img}
         source={require('../assets/little-lemon-logo-grey.png')}
         resizeMode="center"
         accessible={true}
         accessibilityLabel={'Little Lemon Logo'}
       />
 
-      <Text style={styles.text}>Subscribe to our newlatter for our latest delicius recipes!</Text>
+      <Text style={estilos.text}>Subscribe to our newlatter for our latest delicius recipes!</Text>
 
       <TextInput
-        style={styles.email}
+        style={estilos.email}
         value={email}
         onChangeText={onChangeEmail}
         placeholder={'Email'}
@@ -28,8 +28,8 @@ const CadastrarScreen = () => {
         textContentType="emailAddress"
       />
 
-      <Pressable style={styles.botao} onPress={() => Alert.alert('Sucesso!', 'Thanks for subscribings, stay tuned!')} disabled={!validEmail}>
-        <Text style={styles.botaoText}>Subscribe</Text>
+      <Pressable style={estilos.botao} onPress={() => Alert.alert('Sucesso!', 'Thanks for subscribings, stay tuned!')} disabled={!validEmail}>
+        <Text style={estilos.botaoText}>Subscribe</Text>
       </Pressable>
     </View>
   );
@@ -38,7 +38,7 @@ const CadastrarScreen = () => {
 export default CadastrarScreen;
 
 
-const styles = StyleSheet.create({
+const estilos = StyleSheet.create({
   login: {
     height: '100%',
     justifyContent: 'flex-start',
