@@ -7,22 +7,20 @@ const filtroComida = ['Appetizers', 'Salads', 'Beverages'];
 const api_url = 'https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/menu-items-by-category.json'
 
 const MenuScreen = () => {
-  const [data, setData] = useState([]);
+  const [dataApi, setDataApi] = useState([]);
 
   const getDados = async () => {
     try {
       const response = await fetch(api_url);
       const json = await response.json();
-      setData(json.menu);
+      setDataApi(json.menu);
     } catch (error) {
       console.error(error);
     }
   };
 
-  useEffect(() => {
-    getDados();
-  }, []);
-
+  console.log(getDados())
+  console.log(dataApi)
 
   return(
     <SafeAreaView style={{ backgroundColor: '#3E524B', height: '100%' }}>
@@ -41,7 +39,8 @@ const MenuScreen = () => {
       <SectionList
         style={{marginHorizontal: 15}}
         sections={[
-          {title: data[0].id , data: LIST_DEMONSTRACAO[0].data},
+          {title: LIST_DEMONSTRACAO[0].title, data: LIST_DEMONSTRACAO[0].data},
+          {title: LIST_DEMONSTRACAO[1].title, data: LIST_DEMONSTRACAO[1].data},
         ]}
         renderItem={({item}) => (
           <View style={estilos.listaItens}>
