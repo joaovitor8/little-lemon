@@ -1,22 +1,24 @@
-import { StyleSheet } from 'react-native'; //Componentes do ReactNative
-import { NavigationContainer } from '@react-navigation/native'; //Navegação
-import { createNativeStackNavigator } from '@react-navigation/native-stack'; //Navegação
-import BoasVindasScreen from './screen/BoasVindasScreen'; //Tela
-import MenuScreen from './screen/MenuScreen'; //Tela
-import CadastrarScreen from './screen/CadastrarScreen'; //Tela
+import * as React from 'react';
+//import { View, Text, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Home from './screen/Home';
+import Login from './screen/Login';
+import Perfio from './screen/Perfio';
+//import Menu from './screen/Menu';
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Bem Vindo' component={BoasVindasScreen} />
-        <Stack.Screen name='Menu' component={MenuScreen} />
-        <Stack.Screen name='Cadastrar' component={CadastrarScreen} />
+        <Stack.Screen name="Home" component={Home}/>
+        <Stack.Screen name="Login" component={Login}/>
+        <Stack.Screen name="Perfio" component={Perfio} options={{title: 'Little Limon', headerTitleAlign: 'center', headerTintColor: '#495E57'}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
 
-const estilos = StyleSheet.create({});
+//const estilos = StyleSheet.create({});
