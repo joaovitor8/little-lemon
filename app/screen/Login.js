@@ -35,47 +35,11 @@ export default function Login() {
 
   //--------------------------------------------------
 
-  function Ver() {
-    AsyncStorage.getItem('@chaveNome').then(valorArmazenado => {
-      console.log(valorArmazenado);
-    }).catch(erro => {
-      console.log(erro);
-    });
-    AsyncStorage.getItem('@chaveEmail').then(valorArmazenado => {
-      console.log(valorArmazenado);
-    }).catch(erro => {
-      console.log(erro);
-    });
-  }
-
-  Ver()
-
-  //--------------------------------------------------
-
-  const pegarDados = async () => {
-    try {
-      const valor = await AsyncStorage.getItem('@chave');
-      if (valor !== null) {
-        // valor recuperado com sucesso
-      }
-    }catch (e) { 
-      console.error(e)
-    }
-  }
-
   //const removeDado = async () => {
   //  try {
   //    await AsyncStorage.removeItem('@chave');
   //  } catch (e) {
   //    // erro ao remover o valor
-  //  }
-  //}
-
-  //const apagarTodosDados = async () => {
-  //  try {
-  //    await AsyncStorage.clear();
-  //  } catch (e) {
-  //    // erro ao limpar os valores
   //  }
   //}
 

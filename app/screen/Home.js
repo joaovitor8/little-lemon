@@ -1,4 +1,5 @@
-import { View, Text, Button, Pressable } from 'react-native';
+import { View, Button, } from 'react-native';
+
 
 export default function Home({ navigation }) {
   return (

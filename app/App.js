@@ -1,11 +1,10 @@
 import * as React from 'react';
-//import { View, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './screen/Home';
 import Login from './screen/Login';
 import Perfio from './screen/Perfio';
-//import Menu from './screen/Menu';
+
 
 const Stack = createNativeStackNavigator();
 
@@ -20,5 +19,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-//const estilos = StyleSheet.create({});

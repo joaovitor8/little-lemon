@@ -1,7 +1,87 @@
-import { View, Text, TextInput, Image, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { useState } from 'react';
+import { View, Text, TextInput, Image, StyleSheet, ScrollView, Pressable, Button } from 'react-native';
 import Checkbox from 'expo-checkbox';
+import * as ImagePicker from 'expo-image-picker'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 export default function Perfio() {
+  const [image, setImage] = useState(null);
+  const [nomePerfio, setNomePerfio] = useState('');
+  const [sobrenomePerfio, setSobrenomePerfio] = useState('');
+  const [emailPerfio, setEmailPerfio] = useState('');
+  const [telefone, setTelefonePerfio] = useState('');
+
+  //--------------------------------------------------
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
+  //--------------------------------------------------
+
+  const validarTexto = (valor) => {
+    if (valor !== undefined && valor !== null && valor.trim() !== '') {
+      setSobrenomePerfio(valor);
+    }
+  };
+
+  //--------------------------------------------------
+
+  const salvarDados = async (sobrenomePerfio) => {
+    try {
+      await AsyncStorage.setItem('@chaveSobrenome', sobrenomePerfio);
+    }catch (e) {
+      console.error('Nome/Email invalido', e)
+    }
+  }
+
+  //--------------------------------------------------
+
+  function PegarDados() {
+    AsyncStorage.getItem('@chaveNome').then(valorArmazenado => {
+      console.log(valorArmazenado)
+      setNomePerfio(valorArmazenado)
+    }).catch(erro => {
+      console.log(erro);
+    });
+    AsyncStorage.getItem('@chaveSobrenome').then(valorArmazenado => {
+      console.log(valorArmazenado)
+      setSobrenomePerfio(valorArmazenado)
+    }).catch(erro => {
+      console.log(erro);
+    });
+    AsyncStorage.getItem('@chaveEmail').then(valorArmazenado => {
+      console.log(valorArmazenado)
+      setEmailPerfio(valorArmazenado)
+    }).catch(erro => {
+      console.log(erro);
+    });
+  }
+
+  PegarDados()
+
+  //--------------------------------------------------
+
+
+  //const apagarTodosDados = async () => {
+  //  try {
+  //    await AsyncStorage.clear();
+  //  } catch (e) {
+  //    // erro ao limpar os valores
+  //  }
+  //}
+
+
   return (
     <View style={{ backgroundColor: 'white',}}>
       <ScrollView style={{ marginLeft: 10, marginRight: 10 }}>
@@ -11,15 +91,15 @@ export default function Perfio() {
         <View style={{marginBottom: 15, marginTop: 15, flexDirection: 'row' }}>
           <View>
             <Text>Avatar</Text>
-            <Image />
+            {image && <Image source={{ uri: image }} style={{ width: 50, height: 50 }} />}
           </View>
 
           <View style={{flexDirection: 'row', marginLeft: 20 }}>
-            <Pressable>
+            <Pressable style={estilos.imageBotaoAtualizar} onPress={pickImage}>
               <Text>Atualizar</Text>
             </Pressable>
 
-            <Pressable>
+            <Pressable style={estilos.imageBotaoRemover}>
               <Text>Remover</Text>
             </Pressable>
           </View>
@@ -28,16 +108,16 @@ export default function Perfio() {
 
         <View style={{ marginBottom: 10, marginTop: 15 }}>
           <Text style={estilos.informacoesText}>Primeiro Nome</Text>
-          <TextInput style={estilos.informacoesInput} keyboardType='default'/>
+          <TextInput style={estilos.informacoesInput} value={nomePerfio} keyboardType='default'/>
 
           <Text style={estilos.informacoesText}>Segundo Nome</Text>
-          <TextInput style={estilos.informacoesInput} keyboardType='default'/>
+          <TextInput style={estilos.informacoesInput} value={sobrenomePerfio} keyboardType='default' onChangeText={(e) => validarTexto(e)}/>
 
           <Text style={estilos.informacoesText}>Email</Text>
-          <TextInput style={estilos.informacoesInput} keyboardType='email-address'/>
+          <TextInput style={estilos.informacoesInput} value={emailPerfio} keyboardType='email-address'/>
 
           <Text style={estilos.informacoesText}>Numero de Telefone</Text>
-          <TextInput style={estilos.informacoesInput} keyboardType='phone-pad'/>
+          <TextInput style={estilos.informacoesInput}  keyboardType='phone-pad'/>
         </View>
 
 
@@ -45,22 +125,22 @@ export default function Perfio() {
           <Text style={estilos.checkTitulo}>Notificações</Text>
 
           <View style={estilos.check}>
-            <Checkbox />
+            <Checkbox value={true}/>
             <Text style={estilos.checkText}>Status do pedido</Text>
           </View>
 
           <View style={estilos.check}>
-            <Checkbox />
+            <Checkbox value={true}/>
             <Text style={estilos.checkText}>Senha alterada</Text>
           </View>
 
           <View style={estilos.check}>
-            <Checkbox />
+            <Checkbox value={true}/>
             <Text style={estilos.checkText}>Ofertas especiais</Text>
           </View>
 
           <View style={estilos.check}>
-            <Checkbox />
+            <Checkbox value={true}/>
             <Text style={estilos.checkText}>Newsletter</Text>
           </View>
         </View>
@@ -76,7 +156,7 @@ export default function Perfio() {
               <Text style={estilos.alteracaoText}>Descartar alterações</Text>
             </Pressable>
 
-            <Pressable style={estilos.alteracao}>
+            <Pressable style={estilos.alteracao} onPress={() => {salvarDados(sobrenomePerfio)}}>
               <Text style={estilos.alteracaoText}>Salvar alterações</Text>
             </Pressable>
           </View>
@@ -92,6 +172,27 @@ const estilos = StyleSheet.create({
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 5,
+  },
+  //-------------------------
+  imageBotaoAtualizar: {
+    height: 40,
+    width: 80,
+    backgroundColor: '#495E57',
+    marginRight: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 8,
+  },
+  imageBotaoRemover: {
+    height: 40,
+    width: 80,
+    borderWidth: 1,
+    borderColor: '#495E57',
+    backgroundColor: 'white',
+    marginLeft: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
   },
   //-------------------------
   informacoesText: {
