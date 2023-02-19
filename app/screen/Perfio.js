@@ -10,7 +10,7 @@ export default function Perfio() {
   const [nomePerfio, setNomePerfio] = useState('');
   const [sobrenomePerfio, setSobrenomePerfio] = useState('');
   const [emailPerfio, setEmailPerfio] = useState('');
-  const [telefone, setTelefonePerfio] = useState('');
+  const [telefonePerfio, setTelefonePerfio] = useState('');
 
   //--------------------------------------------------
 
@@ -28,59 +28,37 @@ export default function Perfio() {
   };
 
   //--------------------------------------------------
-
-  const validarTexto = (valor) => {
-    if (valor !== undefined && valor !== null && valor.trim() !== '') {
-      setSobrenomePerfio(valor);
+  
+  const validarNome = (valor) => {
+    if (valor !== undefined && valor !== null) {
+      //
     }
   };
 
-  //--------------------------------------------------
+  const validarSobrenome = (valor) => {
+    if (valor !== undefined && valor !== null) {
+      //
+    }
+  };
 
-  const salvarDados = async (sobrenomePerfio) => {
-    try {
-      await AsyncStorage.setItem('@chaveSobrenome', sobrenomePerfio);
-    }catch (e) {
-      console.error('Nome/Email invalido', e)
+  const validacaoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const validarEmail = (valor) => {
+    if (validacaoEmail.test(valor)) {
+      //
+    }
+  };
+
+  const validacaoTelefone = /^(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/;
+  const validarTelefone = (valor) => {
+    if (validacaoTelefone.test(valor)) {
+      //
     }
   }
 
   //--------------------------------------------------
 
-  function PegarDados() {
-    AsyncStorage.getItem('@chaveNome').then(valorArmazenado => {
-      console.log(valorArmazenado)
-      setNomePerfio(valorArmazenado)
-    }).catch(erro => {
-      console.log(erro);
-    });
-    AsyncStorage.getItem('@chaveSobrenome').then(valorArmazenado => {
-      console.log(valorArmazenado)
-      setSobrenomePerfio(valorArmazenado)
-    }).catch(erro => {
-      console.log(erro);
-    });
-    AsyncStorage.getItem('@chaveEmail').then(valorArmazenado => {
-      console.log(valorArmazenado)
-      setEmailPerfio(valorArmazenado)
-    }).catch(erro => {
-      console.log(erro);
-    });
-  }
-
-  PegarDados()
 
   //--------------------------------------------------
-
-
-  //const apagarTodosDados = async () => {
-  //  try {
-  //    await AsyncStorage.clear();
-  //  } catch (e) {
-  //    // erro ao limpar os valores
-  //  }
-  //}
-
 
   return (
     <View style={{ backgroundColor: 'white',}}>
@@ -108,16 +86,16 @@ export default function Perfio() {
 
         <View style={{ marginBottom: 10, marginTop: 15 }}>
           <Text style={estilos.informacoesText}>Primeiro Nome</Text>
-          <TextInput style={estilos.informacoesInput} value={nomePerfio} keyboardType='default'/>
+          <TextInput style={estilos.informacoesInput} keyboardType='default'/>
 
           <Text style={estilos.informacoesText}>Segundo Nome</Text>
-          <TextInput style={estilos.informacoesInput} value={sobrenomePerfio} keyboardType='default' onChangeText={(e) => validarTexto(e)}/>
+          <TextInput style={estilos.informacoesInput} keyboardType='default'/>
 
           <Text style={estilos.informacoesText}>Email</Text>
-          <TextInput style={estilos.informacoesInput} value={emailPerfio} keyboardType='email-address'/>
+          <TextInput style={estilos.informacoesInput} keyboardType='email-address'/>
 
           <Text style={estilos.informacoesText}>Numero de Telefone</Text>
-          <TextInput style={estilos.informacoesInput}  keyboardType='phone-pad'/>
+          <TextInput style={estilos.informacoesInput} keyboardType='phone-pad'/>
         </View>
 
 
@@ -156,7 +134,7 @@ export default function Perfio() {
               <Text style={estilos.alteracaoText}>Descartar alterações</Text>
             </Pressable>
 
-            <Pressable style={estilos.alteracao} onPress={() => {salvarDados(sobrenomePerfio)}}>
+            <Pressable style={estilos.alteracao}>
               <Text style={estilos.alteracaoText}>Salvar alterações</Text>
             </Pressable>
           </View>

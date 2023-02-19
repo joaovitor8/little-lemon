@@ -1,11 +1,8 @@
-import { View, Button, } from 'react-native';
+import { View } from 'react-native';
 
 
-export default function Home({ navigation }) {
+export default function Home() {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button title='Login' onPress={() => navigation.navigate('Login')}/>
-      <Button title='Perfio' onPress={() => navigation.navigate('Perfio')}/>
-    </View>
+    <View> </View>
   );
 }

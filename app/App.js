@@ -12,10 +12,21 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Home" component={Home}/>
-        <Stack.Screen name="Login" component={Login}/>
-        <Stack.Screen name="Perfio" component={Perfio} options={{title: 'Little Limon', headerTitleAlign: 'center', headerTintColor: '#495E57'}}/>
+        {state.isOnboardingCompleted ? (
+          <Stack.Screen name="Home" component={Home}/>
+        ) : (
+          <Stack.Screen name="Login" component={Login} />
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
+
+
+
+
+//<Stack.Screen name="Login" component={Login}/>
+
+//<Stack.Screen name="Home" component={Home}/>
+//<Stack.Screen name="Login" component={Login}/>
+//<Stack.Screen name="Perfio" component={Perfio} options={{title: 'Little Limon', headerTitleAlign: 'center', headerTintColor: '#495E57'}}/>

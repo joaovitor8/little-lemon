@@ -34,16 +34,6 @@ export default function Login() {
   }
 
   //--------------------------------------------------
-
-  //const removeDado = async () => {
-  //  try {
-  //    await AsyncStorage.removeItem('@chave');
-  //  } catch (e) {
-  //    // erro ao remover o valor
-  //  }
-  //}
-
-  //--------------------------------------------------
   
   return (
     <View style={estilos.login}>
