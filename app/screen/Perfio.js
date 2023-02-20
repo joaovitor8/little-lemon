@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { View, Text, TextInput, Image, StyleSheet, ScrollView, Pressable, Button } from 'react-native';
+import { View, Text, TextInput, Image, StyleSheet, ScrollView, Pressable } from 'react-native';
 import Checkbox from 'expo-checkbox';
 import * as ImagePicker from 'expo-image-picker'
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -57,13 +57,40 @@ export default function Perfio() {
 
   //--------------------------------------------------
 
+  const pegarDados = () => {
+    AsyncStorage.getItem('@chaveNome').then(valorArmazenado => {
+      console.log(valorArmazenado);
+      setNomePerfio(valorArmazenado)
+    }).catch(erro => {
+      console.log(erro);
+    });
+    AsyncStorage.getItem('@chaveEmail').then(valorArmazenado => {
+      console.log(valorArmazenado);
+      setEmailPerfio(valorArmazenado)
+    }).catch(erro => {
+      console.log(erro);
+    });
+  }
 
+  pegarDados()
+
+  //--------------------------------------------------
+
+  const limparDados = async () => {
+    try {
+      await AsyncStorage.clear();
+    } catch (e) {
+      console.error(e)
+    }
+  }
+  
   //--------------------------------------------------
 
   return (
     <View style={{ backgroundColor: 'white',}}>
       <ScrollView style={{ marginLeft: 10, marginRight: 10 }}>
         <Text style={estilos.perfioTitulo}>Informações Pessoais</Text>
+
 
 
         <View style={{marginBottom: 15, marginTop: 15, flexDirection: 'row' }}>
@@ -84,19 +111,21 @@ export default function Perfio() {
         </View>
 
 
+
         <View style={{ marginBottom: 10, marginTop: 15 }}>
           <Text style={estilos.informacoesText}>Primeiro Nome</Text>
-          <TextInput style={estilos.informacoesInput} keyboardType='default'/>
+          <TextInput style={estilos.informacoesInput} value={nomePerfio} keyboardType='default'/>
 
           <Text style={estilos.informacoesText}>Segundo Nome</Text>
           <TextInput style={estilos.informacoesInput} keyboardType='default'/>
 
           <Text style={estilos.informacoesText}>Email</Text>
-          <TextInput style={estilos.informacoesInput} keyboardType='email-address'/>
+          <TextInput style={estilos.informacoesInput} value={emailPerfio} keyboardType='email-address'/>
 
           <Text style={estilos.informacoesText}>Numero de Telefone</Text>
           <TextInput style={estilos.informacoesInput} keyboardType='phone-pad'/>
         </View>
+
 
 
         <View style={{ marginBottom: 15, marginTop: 10 }}>
@@ -124,21 +153,17 @@ export default function Perfio() {
         </View>
 
 
+
         <View style={{ marginBottom: 50, marginTop: 15 }}>
-          <Pressable style={estilos.botaoSair}>
+          <Pressable style={estilos.botaoSair} onPress={limparDados}>
             <Text>Sair</Text>
           </Pressable>
 
-          <View style={estilos.botoesAlteracao}>
-            <Pressable style={estilos.alteracao}>
-              <Text style={estilos.alteracaoText}>Descartar alterações</Text>
-            </Pressable>
-
-            <Pressable style={estilos.alteracao}>
-              <Text style={estilos.alteracaoText}>Salvar alterações</Text>
-            </Pressable>
-          </View>
+          <Pressable style={estilos.alteracao}>
+            <Text style={{color: 'white'}}>Salvar alterações</Text>
+          </Pressable>
         </View>
+        
       </ScrollView>
     </View>
   );
@@ -179,8 +204,9 @@ const estilos = StyleSheet.create({
   informacoesInput: {
     backgroundColor: 'white',
     borderRadius: 5,
-    borderWidth: 1,
-    height: 35,
+    borderWidth: 2,
+    borderColor: '#E9E9ED',
+    height: 40,
     marginBottom: 20,
     paddingLeft: 5,
   },
@@ -200,26 +226,21 @@ const estilos = StyleSheet.create({
   },
   //-------------------------
   botaoSair: {
-    backgroundColor: 'yellow',
+    backgroundColor: '#F4CE14',
     justifyContent: 'center',
     alignItems: 'center',
     height: 40,
     borderRadius: 8,
     marginBottom: 15,
-  },
-  botoesAlteracao: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    borderWidth: 1,
+    borderColor: '#DCAD54',
   },
   alteracao: {
     backgroundColor: '#495E57',
-    width: '45%',
     height: 40,
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-  },
-  alteracaoText: {
-    color: 'white',
+    borderWidth: 1,
   },
 });

@@ -1,8 +1,10 @@
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 
 
 export default function Home() {
   return (
-    <View> </View>
+    <View>
+      <Text>Menu</Text>
+    </View>
   );
 }
