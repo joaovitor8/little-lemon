@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, Image, TextInput, Pressable} from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+//import { Texto, Email } from '../utils/Validacoes';
+import { Salvar } from '../utils/Dados';
 
 
 export default function Login({ navigation }) {
@@ -9,29 +10,18 @@ export default function Login({ navigation }) {
   
   //--------------------------------------------------
 
-  const validarTexto = (valor) => {
-    if (valor !== undefined && valor !== null && valor.trim() !== '') {
+  const Texto = (valor) => {
+    if (valor !== undefined && valor !== null && valor !== '') {
       setNome(valor);
     }
   };
 
   const validacaoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const validarEmail = (valor) => {
+  const Email = (valor) => {
     if (validacaoEmail.test(valor)) {
       setEmail(valor);
     }
   };
-
-  //--------------------------------------------------
-
-  const salvarDados = async (name, email) => {
-    try {
-      await AsyncStorage.setItem('@chaveNome', name);
-      await AsyncStorage.setItem('@chaveEmail', email);
-    }catch (e) {
-      console.error('Nome/Email invalido', e)
-    }
-  }
 
   //--------------------------------------------------
   
@@ -45,14 +35,14 @@ export default function Login({ navigation }) {
 
         <View style={estilos.corpoInputs}>
           <Text style={estilos.corpoTexto}>Nome</Text>
-          <TextInput style={estilos.corpoInput} keyboardType='default' onChangeText={(e) => validarTexto(e)}/>
+          <TextInput style={estilos.corpoInput} keyboardType='default' onChangeText={(e) => Texto(e)}/>
           <Text style={estilos.corpoTexto}>Email</Text>
-          <TextInput style={estilos.corpoInput} keyboardType='email-address' onChangeText={(e) => validarEmail(e)}/>
+          <TextInput style={estilos.corpoInput} keyboardType='email-address' onChangeText={(e) => Email(e)}/>
         </View>
       </View>
 
       <View style={estilos.rodape}>
-        <Pressable style={estilos.rodapeBotao} onPress={() => {salvarDados(nome, email), () => navigation.navigate('Perfio')}}>
+        <Pressable style={estilos.rodapeBotao} onPress={() => {Salvar(nome, email), console.log('Salvo!!!')}}>
           <Text>Next</Text>
         </Pressable>
       </View>
@@ -112,3 +102,6 @@ const estilos = StyleSheet.create({
     marginRight: 20,
   },
 });
+
+
+// onPress={() => {salvarDados(nome, email), navigation.navigate('Perfio')}}

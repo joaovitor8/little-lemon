@@ -3,6 +3,7 @@ import { View, Text, TextInput, Image, StyleSheet, ScrollView, Pressable } from 
 import Checkbox from 'expo-checkbox';
 import * as ImagePicker from 'expo-image-picker'
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Limpar } from '../utils/Dados';
 
 
 export default function Perfio() {
@@ -28,34 +29,6 @@ export default function Perfio() {
   };
 
   //--------------------------------------------------
-  
-  const validarNome = (valor) => {
-    if (valor !== undefined && valor !== null) {
-      //
-    }
-  };
-
-  const validarSobrenome = (valor) => {
-    if (valor !== undefined && valor !== null) {
-      //
-    }
-  };
-
-  const validacaoEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const validarEmail = (valor) => {
-    if (validacaoEmail.test(valor)) {
-      //
-    }
-  };
-
-  const validacaoTelefone = /^(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/;
-  const validarTelefone = (valor) => {
-    if (validacaoTelefone.test(valor)) {
-      //
-    }
-  }
-
-  //--------------------------------------------------
 
   const pegarDados = () => {
     AsyncStorage.getItem('@chaveNome').then(valorArmazenado => {
@@ -73,16 +46,6 @@ export default function Perfio() {
   }
 
   pegarDados()
-
-  //--------------------------------------------------
-
-  const limparDados = async () => {
-    try {
-      await AsyncStorage.clear();
-    } catch (e) {
-      console.error(e)
-    }
-  }
   
   //--------------------------------------------------
 
@@ -155,7 +118,7 @@ export default function Perfio() {
 
 
         <View style={{ marginBottom: 50, marginTop: 15 }}>
-          <Pressable style={estilos.botaoSair} onPress={limparDados}>
+          <Pressable style={estilos.botaoSair} onPress={Limpar}>
             <Text>Sair</Text>
           </Pressable>
 
