@@ -55,7 +55,6 @@ export default function Perfio() {
         <Text style={estilos.perfioTitulo}>Informações Pessoais</Text>
 
 
-
         <View style={{marginBottom: 15, marginTop: 15, flexDirection: 'row' }}>
           <View>
             <Text>Avatar</Text>
@@ -74,7 +73,6 @@ export default function Perfio() {
         </View>
 
 
-
         <View style={{ marginBottom: 10, marginTop: 15 }}>
           <Text style={estilos.informacoesText}>Primeiro Nome</Text>
           <TextInput style={estilos.informacoesInput} value={nomePerfio} keyboardType='default'/>
@@ -88,7 +86,6 @@ export default function Perfio() {
           <Text style={estilos.informacoesText}>Numero de Telefone</Text>
           <TextInput style={estilos.informacoesInput} keyboardType='phone-pad'/>
         </View>
-
 
 
         <View style={{ marginBottom: 15, marginTop: 10 }}>
@@ -116,7 +113,6 @@ export default function Perfio() {
         </View>
 
 
-
         <View style={{ marginBottom: 50, marginTop: 15 }}>
           <Pressable style={estilos.botaoSair} onPress={Limpar}>
             <Text>Sair</Text>
@@ -131,6 +127,7 @@ export default function Perfio() {
     </View>
   );
 }
+
 
 const estilos = StyleSheet.create({
   perfioTitulo: {
@@ -207,3 +204,4 @@ const estilos = StyleSheet.create({
     borderWidth: 1,
   },
 });
+

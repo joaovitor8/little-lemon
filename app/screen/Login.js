@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Image, TextInput, Pressable} from 'react-native
 import { Salvar } from '../utils/Dados';
 
 
-export default function Login({ navigation }) {
+export default function Login() {
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
   
