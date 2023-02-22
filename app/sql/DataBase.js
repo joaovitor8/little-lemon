@@ -36,17 +36,47 @@ export const AddDados = () => {
 }
 
 
+export const Conferir = () => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'SELECT COUNT(*) as count FROM menu',
+      [],
+      (_, { rows }) => {
+        const { count } = rows.item(0);
+        if (count === 0) {
+          console.log('A tabela está vazia.');
+        } else {
+          console.log(`A tabela contém ${count} registros.`);
+        }
+      }
+    );
+  });
+}
+
+
 export const VerTabela = () => {
   db.transaction((tx) => {
     tx.executeSql(
-      'SELECT COUNT(*) as count FROM menu;',
+      'SELECT * FROM menu;',
       [],
-      (_, result) => {
-        const count = result.rows.item(0).count;
-        console.log(`There are ${count} rows in the table`);
+      (_, { rows }) => {
+        console.log(rows._array);
       },
       (_, error) => {
         console.log('Error checking for rows:', error);
+      }
+    );
+  });
+}
+
+
+export const Deletar = () => {
+  db.transaction(tx => {
+    tx.executeSql(
+      'DROP TABLE IF EXISTS menu',
+      [],
+      (_, { rowsAffected }) => {
+        console.log('Tabela deleta');
       }
     );
   });

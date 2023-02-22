@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, Button } from 'react-native';
-import { CriarTabela, AddDados, VerTabela } from '../sql/DataBase';
+import { CriarTabela, AddDados, Conferir, VerTabela, Deletar } from '../sql/DataBase';
 
-const api = 'https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/capstone.json'
+{/*  se não estiver tabela buscar dados na api  /  senão, pegar da tabela  */}
 
-
-export default function Home({ navigation }) {
+const HomeApi = () => {
   const [apiDados, setApiDados] = useState([])
 
-  //--------------------------------------------------
+  const api = 'https://raw.githubusercontent.com/Meta-Mobile-Developer-PC/Working-With-Data-API/main/capstone.json'
 
   const getMenu = async () => {
     try {
@@ -21,20 +20,33 @@ export default function Home({ navigation }) {
   };
 
   useEffect(() => {
-    getMenu();
+    getMenu()
   }, []);
 
-  //--------------------------------------------------
+  return apiDados
+  //CriarTabela()
+  //AddDados()
+}
 
-  CriarTabela()
-  AddDados()
-  VerTabela()
+//-------------------------------------------------------------------------------------------------
+
+const HomeTabela = () =>{
+  //Conferir()
+  //VerTabela()
+}
+
+//-------------------------------------------------------------------------------------------------
+
+export default function Home({ navigation }) {
+
+  Deletar()
+  //console.log(HomeApi())
 
   return (
     <View style={{ backgroundColor: 'white',}}>
       <Button title={'Perfio'} onPress={() => navigation.navigate('Perfio')}/>
 
-      <FlatList data={apiDados} keyExtractor={item=>item.name} renderItem={({item}) =>
+      <FlatList data={HomeApi()} keyExtractor={item=>item.name} renderItem={({item}) =>
         <View style={estilos.list}>
           <Text style={estilos.listNome}>{item.name}</Text>
           {/* Image */}
