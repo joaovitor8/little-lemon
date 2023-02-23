@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, Button } from 'react-native';
-import { CriarTabela, AddDados, Conferir, VerTabela, Deletar } from '../sql/DataBase';
+import { ConferirTabela, Deletar, PegarDados } from '../sql/DataBase';
 
-{/*  se não estiver tabela buscar dados na api  /  senão, pegar da tabela  */}
 
 const HomeApi = () => {
   const [apiDados, setApiDados] = useState([])
@@ -23,30 +22,11 @@ const HomeApi = () => {
     getMenu()
   }, []);
 
-  return apiDados
-  //CriarTabela()
-  //AddDados()
-}
-
-//-------------------------------------------------------------------------------------------------
-
-const HomeTabela = () =>{
-  //Conferir()
-  //VerTabela()
-}
-
-//-------------------------------------------------------------------------------------------------
-
-export default function Home({ navigation }) {
-
-  Deletar()
-  //console.log(HomeApi())
+  //ConferirTabela(apiDados)
 
   return (
     <View style={{ backgroundColor: 'white',}}>
-      <Button title={'Perfio'} onPress={() => navigation.navigate('Perfio')}/>
-
-      <FlatList data={HomeApi()} keyExtractor={item=>item.name} renderItem={({item}) =>
+      <FlatList data={apiDados} keyExtractor={item=>item.name} renderItem={({item}) =>
         <View style={estilos.list}>
           <Text style={estilos.listNome}>{item.name}</Text>
           {/* Image */}
@@ -58,6 +38,24 @@ export default function Home({ navigation }) {
   );
 }
 
+//-------------------------------------------------------------------------------------------------
+
+const HomeTabela = () => {
+  //PegarDados()
+}
+
+//-------------------------------------------------------------------------------------------------
+
+export default function Home({ navigation }) {
+  return (
+    <View>
+      <Button title={'Perfio'} onPress={() => navigation.navigate('Perfio')}/>
+      {HomeApi()}
+    </View>
+  )
+}
+
+//Deletar()
 
 const estilos = StyleSheet.create({
   list: {

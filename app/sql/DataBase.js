@@ -3,11 +3,27 @@ import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase('little_lemon');
 
+export const ConferirTabela = (apiDados) => {
+  db.transaction(tx => {
+    tx.executeSql("SELECT name FROM sqlite_master WHERE type='table' AND name='menu'",
+      [],
+      (_, { rows }) => {
+        if (rows.length > 0) {
+          console.log('A tabela "menu" existe.');
+          ConferirDados(apiDados)
+        } else {
+          console.log('A tabela "menu" não existe.');
+          CriarTabela()
+        }
+      }
+    );
+  });
+}
+
 
 export const CriarTabela = () => {
   db.transaction((tx) => {
-    tx.executeSql(
-      'CREATE TABLE IF NOT EXISTS menu (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, preco TEXT, descricao TEXT, imagem TEXT);',
+    tx.executeSql('CREATE TABLE IF NOT EXISTS menu (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, preco TEXT, descricao TEXT, imagem TEXT);',
       [],
       (_, result) => {
         console.log('Tabela criada com Sucesso');
@@ -20,31 +36,15 @@ export const CriarTabela = () => {
 }
 
 
-export const AddDados = () => {
-  db.transaction((tx) => {
-    tx.executeSql(
-      'INSERT INTO menu (nome, preco, descricao, imagem) VALUES (?, ?, ?, ?);',
-      ['teste1', 'teste2', 'teste3', 'teste4'],
-      (_, result) => {
-        console.log('Dados adicionados com sucesso!');
-      },
-      (_, error) => {
-        console.log('Erro ao adicionar dados:', error);
-      }
-    );
-  });
-}
-
-
-export const Conferir = () => {
+export const ConferirDados = (apiDados) => {
   db.transaction(tx => {
-    tx.executeSql(
-      'SELECT COUNT(*) as count FROM menu',
+    tx.executeSql('SELECT COUNT(*) as count FROM menu',
       [],
       (_, { rows }) => {
         const { count } = rows.item(0);
         if (count === 0) {
           console.log('A tabela está vazia.');
+          AddDados(apiDados)
         } else {
           console.log(`A tabela contém ${count} registros.`);
         }
@@ -54,10 +54,28 @@ export const Conferir = () => {
 }
 
 
-export const VerTabela = () => {
+export const AddDados = (apiDados) => {
   db.transaction((tx) => {
-    tx.executeSql(
-      'SELECT * FROM menu;',
+    apiDados.forEach(item => {
+      tx.executeSql('INSERT INTO menu (nome, preco, descricao, imagem) VALUES (?, ?, ?, ?);',
+        [item.name, item.price, item.description, item.image],
+        (_, { rowsAffected, insertId }) => {
+          console.log(`Linhas afetadas: ${rowsAffected}`);
+          console.log(`ID da linha inserida: ${insertId}`);
+          console.log('Dados adicionados com sucesso!');
+        },
+        (_, error) => {
+          console.log('Erro ao adicionar dados:', error);
+        }
+      );
+    })
+  });
+}
+
+
+export const PegarDados = () => {
+  db.transaction((tx) => {
+    tx.executeSql('SELECT * FROM menu;',
       [],
       (_, { rows }) => {
         console.log(rows._array);
@@ -72,8 +90,7 @@ export const VerTabela = () => {
 
 export const Deletar = () => {
   db.transaction(tx => {
-    tx.executeSql(
-      'DROP TABLE IF EXISTS menu',
+    tx.executeSql('DROP TABLE IF EXISTS menu',
       [],
       (_, { rowsAffected }) => {
         console.log('Tabela deleta');

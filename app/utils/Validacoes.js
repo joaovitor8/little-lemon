@@ -1,5 +1,5 @@
 
-
+//--------------------------------------------------
 
 export const Nome = (valor) => {
   if (valor !== undefined && valor !== null && valor.trim() !== '') {}
@@ -18,3 +18,5 @@ const validacaoTelefone = /^(\()?\d{2}(\))?(-|\s)?\d{4}(-|\s)\d{4}$/;
 export const Telefone = (valor) => {
   if (validacaoTelefone.test(valor)) {}
 }
+
+//--------------------------------------------------
