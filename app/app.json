@@ -3,6 +3,9 @@
     "name": "app",
     "slug": "app",
     "version": "1.0.0",
+    "permissions": {
+      "expo-sqlite": ["WRITE_EXTERNAL_STORAGE"]
+    },
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

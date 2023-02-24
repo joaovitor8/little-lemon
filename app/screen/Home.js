@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, Button } from 'react-native';
-import { ConferirTabela, Deletar, PegarDados } from '../sql/DataBase';
+import { ConferirTabela, Deletar } from '../sql/DataBase';
+import * as SQLite from 'expo-sqlite';
 
 
 const HomeApi = () => {
@@ -22,11 +23,13 @@ const HomeApi = () => {
     getMenu()
   }, []);
 
-  //ConferirTabela(apiDados)
+  ConferirTabela(apiDados)
+
+  //console.log(apiDados)
 
   return (
     <View style={{ backgroundColor: 'white',}}>
-      <FlatList data={apiDados} keyExtractor={item=>item.name} renderItem={({item}) =>
+      <FlatList data={apiDados} key={(item) => item.nome} renderItem={({item}) =>
         <View style={estilos.list}>
           <Text style={estilos.listNome}>{item.name}</Text>
           {/* Image */}
@@ -41,8 +44,56 @@ const HomeApi = () => {
 //-------------------------------------------------------------------------------------------------
 
 const HomeTabela = () => {
-  //PegarDados()
-}
+  const [dados, setDados] = useState([]);
+
+  const db = SQLite.openDatabase('little_lemon');
+
+  const getMenu = async () => {
+    try {
+      db.transaction(tx => {
+        tx.executeSql(
+          'SELECT * FROM menu;',
+          [],
+          (_, { rows }) => {
+            setDados(rows._array)
+          },
+          (tx, error) => {
+            console.log('Error:', error);
+          }
+        );
+      });
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
+
+  useEffect(() => {
+    getMenu()
+  }, []);
+
+  console.log(dados)
+
+  return (
+    <View style={{ backgroundColor: 'white' }}>
+      {dados.length > 0 ? (
+        <FlatList 
+          data={dados} 
+          key={(item) => item.id} 
+          renderItem={({ item }) => (
+            <View style={estilos.list}>
+              <Text style={estilos.listNome}>{item.name}</Text>
+              {/* Image */}
+              <Text style={estilos.listDescricao}>{item.description}</Text>
+              <Text style={estilos.listPreco}>${item.price}</Text>
+            </View>
+          )}
+        />
+      ) : (
+        <Text>No data available</Text>
+      )}
+    </View>
+  );
+};
 
 //-------------------------------------------------------------------------------------------------
 
@@ -50,7 +101,7 @@ export default function Home({ navigation }) {
   return (
     <View>
       <Button title={'Perfio'} onPress={() => navigation.navigate('Perfio')}/>
-      {HomeApi()}
+      {HomeTabela()}
     </View>
   )
 }

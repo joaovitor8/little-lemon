@@ -23,7 +23,7 @@ export const ConferirTabela = (apiDados) => {
 
 export const CriarTabela = () => {
   db.transaction((tx) => {
-    tx.executeSql('CREATE TABLE IF NOT EXISTS menu (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, preco TEXT, descricao TEXT, imagem TEXT);',
+    tx.executeSql('CREATE TABLE IF NOT EXISTS menu (id INTEGER PRIMARY KEY AUTOINCREMENT, nome TEXT, preco TEXT, descricao TEXT, imagem TEXT, categoria TEXT);',
       [],
       (_, result) => {
         console.log('Tabela criada com Sucesso');
@@ -57,8 +57,8 @@ export const ConferirDados = (apiDados) => {
 export const AddDados = (apiDados) => {
   db.transaction((tx) => {
     apiDados.forEach(item => {
-      tx.executeSql('INSERT INTO menu (nome, preco, descricao, imagem) VALUES (?, ?, ?, ?);',
-        [item.name, item.price, item.description, item.image],
+      tx.executeSql('INSERT INTO menu (nome, preco, descricao, imagem,categoria) VALUES (?, ?, ?, ?, ?);',
+        [item.name, item.price, item.description, item.image, item.category],
         (_, { rowsAffected, insertId }) => {
           console.log(`Linhas afetadas: ${rowsAffected}`);
           console.log(`ID da linha inserida: ${insertId}`);
@@ -69,21 +69,6 @@ export const AddDados = (apiDados) => {
         }
       );
     })
-  });
-}
-
-
-export const PegarDados = () => {
-  db.transaction((tx) => {
-    tx.executeSql('SELECT * FROM menu;',
-      [],
-      (_, { rows }) => {
-        console.log(rows._array);
-      },
-      (_, error) => {
-        console.log('Error checking for rows:', error);
-      }
-    );
   });
 }
 
