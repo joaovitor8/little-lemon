@@ -30,7 +30,7 @@ export default function App() {
       <Stack.Navigator>
         {logado ? (
           <>
-            <Stack.Screen name="Home" component={Home} options={{ title: 'Little Limon', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 30, fontWeight: 'bold', color: '#495E57'}, headerStyle: { backgroundColor: 'white' } }}/>
+            <Stack.Screen name="Home" component={Home} options={{ title: 'Little Limon', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 30, fontWeight: 'bold', color: '#495E57'}, headerStyle: { backgroundColor: 'white' } }} />
             <Stack.Screen name="Perfio" component={Perfio} options={{ title: 'Little Limon', headerTitleAlign: 'center', headerTitleStyle: { fontSize: 30, fontWeight: 'bold', color: '#495E57' }, headerStyle: { backgroundColor: 'white' } }}/>
           </>
         ) : (
@@ -41,3 +41,4 @@ export default function App() {
   );
 }
 
+// <Button title={'Perfio'} onPress={() => navigation.navigate('Perfio')}/>

@@ -23,8 +23,7 @@ const HomeApi = () => {
     getMenu()
   }, []);
 
-  ConferirTabela(apiDados)
-
+  //ConferirTabela(apiDados)
   //console.log(apiDados)
 
   return (
@@ -32,7 +31,11 @@ const HomeApi = () => {
       <FlatList data={apiDados} key={(item) => item.nome} renderItem={({item}) =>
         <View style={estilos.list}>
           <Text style={estilos.listNome}>{item.name}</Text>
-          {/* Image */}
+          <Image
+            source={{ uri: `https://github.com/Meta-Mobile-Developer-PC/Working-With-Data-API/blob/main/images/${item.image}` }}
+            resizeMode="center"
+            accessible={true}
+          />
           <Text style={estilos.listDescricao}>{item.description}</Text>
           <Text style={estilos.listPreco}>${item.price}</Text>
         </View>
@@ -41,6 +44,7 @@ const HomeApi = () => {
   );
 }
 
+//https://github.com/Meta-Mobile-Developer-PC/Working-With-Data-API/blob/main/images/
 //-------------------------------------------------------------------------------------------------
 
 const HomeTabela = () => {
@@ -97,11 +101,10 @@ const HomeTabela = () => {
 
 //-------------------------------------------------------------------------------------------------
 
-export default function Home({ navigation }) {
+export default function Home() {
   return (
     <View>
-      <Button title={'Perfio'} onPress={() => navigation.navigate('Perfio')}/>
-      {HomeTabela()}
+      {HomeApi()}
     </View>
   )
 }
