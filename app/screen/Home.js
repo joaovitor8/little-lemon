@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, Button } from 'react-native';
 import { ConferirTabela, Deletar } from '../sql/DataBase';
 import * as SQLite from 'expo-sqlite';
+import { App } from '../components/Categoria';
 
 
 const HomeApi = () => {
@@ -44,8 +45,6 @@ const HomeApi = () => {
   );
 }
 
-//https://github.com/Meta-Mobile-Developer-PC/Working-With-Data-API/blob/main/images/
-//-------------------------------------------------------------------------------------------------
 
 const HomeTabela = () => {
   const [dados, setDados] = useState([]);
@@ -101,9 +100,14 @@ const HomeTabela = () => {
 
 //-------------------------------------------------------------------------------------------------
 
+
+
+
+
 export default function Home() {
   return (
     <View>
+      <App/>
       {HomeApi()}
     </View>
   )
